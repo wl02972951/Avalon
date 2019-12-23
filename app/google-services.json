@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "18612961783",
+    "firebase_url": "https://avalon-bd2f9.firebaseio.com",
+    "project_id": "avalon-bd2f9",
+    "storage_bucket": "avalon-bd2f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18612961783:android:46e15e60c9332439bf6ef2",
+        "android_client_info": {
+          "package_name": "com.soda.avalon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18612961783-50016sn6krd6tcuf7kp4opn4qmvtlrar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.soda.avalon",
+            "certificate_hash": "5ac7fe31ff76b9a83fe195dd63e33e96813fa67b"
+          }
+        },
+        {
+          "client_id": "18612961783-madnb9hkv8t4bk9t7or8lkd27r4h2m5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4wWaCN6RdDpWi28_ZEfAxgA5yfGFHqNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18612961783-madnb9hkv8t4bk9t7or8lkd27r4h2m5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
