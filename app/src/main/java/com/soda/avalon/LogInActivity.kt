@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_log_in.*
 import org.jetbrains.anko.contentView
 
@@ -52,9 +54,7 @@ class LogInActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Toast.makeText(this, "$email 歡迎回來", Toast.LENGTH_SHORT).show()
                         finish()
-
                     } else {
                         AlertDialog.Builder(this)
                             .setTitle("登入失敗")

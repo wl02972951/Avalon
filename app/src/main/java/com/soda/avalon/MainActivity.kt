@@ -1,13 +1,16 @@
 package com.soda.avalon
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.firebase.ui.auth.data.model.User
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.email
 import org.jetbrains.anko.info
 
 
@@ -36,8 +40,7 @@ class MainActivity : AppCompatActivity() , FirebaseAuth.AuthStateListener ,AnkoL
         onAuthStateChanged(user)
 
         bt_newgame.setOnClickListener {
-            val alert = ViewLoginDialog()
-            alert.showDialog(this@MainActivity)
+
 
         }
 
@@ -78,15 +81,33 @@ class MainActivity : AppCompatActivity() , FirebaseAuth.AuthStateListener ,AnkoL
         when(requestCode){
             RC_LOGIN->{
                 info { resultCode }
-                when(resultCode){
-                    Activity.RESULT_OK->{
+                if(resultCode ==Activity.RESULT_OK) {
                         startActivityForResult(Intent(this,NickNameActivity::class.java),RC_NICK_NAME)
-                    }
+                }else{
+                    val user =  FirebaseAuth.getInstance()
+                    onAuthStateChanged(user)
                 }
             }
             RC_NICK_NAME->{
-                if (requestCode== Activity.RESULT_OK){
-                    data!!.getStringExtra("")
+                info { resultCode== Activity.RESULT_OK }
+                info { data!!.getStringExtra(NICK_NAME) }
+                if (resultCode== Activity.RESULT_OK){
+                    val email = FirebaseAuth.getInstance().currentUser!!.email
+                    val uid = FirebaseAuth.getInstance().currentUser!!.uid
+                    val nickname =  data!!.getStringExtra(NICK_NAME)
+                    val user = Users(uid,email!!,nickname)
+
+                    firestore.collection("users").document(user.uid).set(user).addOnCompleteListener {
+                        if(it.isSuccessful){
+                            Toast.makeText(this,"Upload Susses",Toast.LENGTH_LONG).show()
+                        }else{
+                            AlertDialog.Builder(this)
+                                .setTitle("Error")
+                                .setMessage(it.exception?.message)
+                                .setPositiveButton("OK",null)
+                                .show()
+                        }
+                    }
                 }
             }
 
@@ -95,9 +116,14 @@ class MainActivity : AppCompatActivity() , FirebaseAuth.AuthStateListener ,AnkoL
 
     override fun onAuthStateChanged(auth: FirebaseAuth) {
         val user = auth.currentUser
+        var currentUser = Users()
         if (user!=null){
             IS_LOGIN = true
-            Toast.makeText(this@MainActivity,"歡迎回來${user.email}",Toast.LENGTH_SHORT).show()
+            firestore.collection("users").document(user.uid).get().addOnSuccessListener {
+                currentUser = it.toObject(Users::class.java)!!
+                Toast.makeText(this@MainActivity,"歡迎回來${currentUser.nickname}",Toast.LENGTH_SHORT).show()
+            }
+
         }else{
             IS_LOGIN = false
             Toast.makeText(this,"初次使用請進行登入或註冊",Toast.LENGTH_LONG).show()

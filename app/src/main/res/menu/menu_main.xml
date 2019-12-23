@@ -8,11 +8,12 @@
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_nick_name"
+        android:orderInCategory="99"
+        android:title="更改暱稱" />
+    <item
         android:id="@+id/action_login"
         android:orderInCategory="101"
-        android:title="登入/註冊" />
-    <item
-        android:id="@+id/action_nick_name"
-        android:orderInCategory="102"
-        android:title="更改暱稱" />
+        android:title="登入/註冊"
+        app:showAsAction="ifRoom" />
 </menu>
