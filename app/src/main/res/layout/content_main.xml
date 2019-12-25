@@ -12,14 +12,14 @@
         android:id="@+id/bt_newgame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="24dp"
         android:text="開啟新房間"
-        app:layout_constraintBottom_toTopOf="@+id/bt_search "
+        app:layout_constraintBottom_toTopOf="@+id/bt_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/bt_search "
+        android:id="@+id/bt_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

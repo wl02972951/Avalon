@@ -7,17 +7,19 @@
     <string-array name="role_list">
         <item>梅林</item>
         <item>派西維爾</item>
+        <item>亞瑟的忠臣</item>
         <item>刺客</item>
         <item>莫甘娜</item>
-        <item>亞瑟的忠臣</item>
+
     </string-array>
 
     <string-array name="role_Introduction">
         <item>知道誰是邪惡方，但必須隱藏自己身份</item>
         <item>知道誰是梅林</item>
+        <item>無</item>
         <item>遊戲任務由善良方獲勝時，可決定刺殺一位善良方，若刺中梅林，則反敗為勝</item>
         <item>在一開始以梅林身分出現來混淆派西維爾</item>
-        <item>無</item>
+
     </string-array>
     <string name="title_activity_game_paly">GamePalyActivity</string>
 
